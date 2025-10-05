@@ -1,0 +1,28 @@
+services:
+  db:
+    image: mysql:latest
+    env_file: .env
+    ports:
+    - "3306:3306"
+    volumes:
+      - .:/app
+      - db:/var/lib/mysql
+
+  app:
+    image: ruby:3.4.2
+    env_file: .env
+    volumes:
+      - .:/app
+      - bundle_path:/usr/local/bundle
+    working_dir: /app
+    command: bundle exec rails server -b 0.0.0.0 -p 3000
+    depends_on:
+      - db
+    ports: 
+      - "3000:3000"
+    tty: true
+    stdin_open: true
+
+volumes:
+  bundle_path:
+  db:
