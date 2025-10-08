@@ -7,3 +7,9 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+5.times do |index|
+  Document.create!(title: "Document #{index}", description: "This is the content of document #{index}.")
+end
+
+puts "Seeded #{Document.count} documents."
