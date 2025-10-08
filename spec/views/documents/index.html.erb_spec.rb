@@ -4,11 +4,11 @@ RSpec.describe "documents/index", type: :view do
   before(:each) do
     assign(:documents, [
       Document.create!(
-        title: "Title",
+        title: "First Title",
         description: "MyText"
       ),
       Document.create!(
-        title: "Title",
+        title: "Second Title",
         description: "MyText"
       )
     ])

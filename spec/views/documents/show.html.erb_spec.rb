@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "documents/show", type: :view do
   before(:each) do
     assign(:document, Document.create!(
-      title: "Title",
+      title: "First Title",
       description: "MyText"
     ))
   end
