@@ -1,0 +1,40 @@
+name: rspec-features
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+env:
+  RAILS_ENV: test
+
+jobs:
+  rspec-unit-feature-tests:
+    name: rspec-feature-app
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Set up Database
+        run: >
+          cp config/database.yml.sample config/database.yml &&
+          cp docker-compose.yml.sample docker-compose.yml &&
+          cp .env.ci .env
+      - run: docker compose run --rm --no-deps app bundle install
+        timeout-minutes: 7
+      - run: docker compose up -d db
+      - run: sudo chown -R $(id -u):$(id -u) vendor/bundle public
+      - run: chmod +x .github/wait-for-db.sh
+      - run: docker compose exec db /app/.github/wait-for-db.sh
+        timeout-minutes: 5
+      - run: >
+          docker compose run app bundle exec rails db:migrate RAILS_ENV=test
+
+      - name: Run RSpec Tests
+        timeout-minutes: 7
+        run: docker compose run app bundle exec rspec --format documentation
