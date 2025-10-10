@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  get 'pages/home'
-  get 'pages/dashboard'
-  get 'pages/my_logs'
-  get 'pages/about'
+  get 'home', to: 'pages#home'
+  get 'dashboard', to: 'pages#dashboard'
+  get 'my_logs', to: 'pages#my_logs'
+  get 'about', to: 'pages#about'
   resources :documents
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "documents#index"
+  root "pages#home"
 end

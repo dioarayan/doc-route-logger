@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    @documents = Document.all
   end
 
   def my_logs
