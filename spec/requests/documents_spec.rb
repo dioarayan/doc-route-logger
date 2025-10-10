@@ -18,11 +18,11 @@ RSpec.describe "/documents", type: :request do
   # Document. As you add validations to Document, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    skip( { title: "Test Document", description: "Some content" })
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    skip( { title: "Test", description: "Some content" } )
   }
 
   describe "GET /index" do
