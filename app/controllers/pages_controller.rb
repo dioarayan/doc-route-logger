@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   end
 
   def my_logs
+    @document = Document.new
   end
 
   def about
