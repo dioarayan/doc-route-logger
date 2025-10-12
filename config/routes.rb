@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'home', to: 'pages#home'
   get 'dashboard', to: 'pages#dashboard'
   get 'my_logs', to: 'pages#my_logs'
